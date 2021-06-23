@@ -147,11 +147,15 @@ class SaleController extends Controller
     public function sellLog(Request $request)
     {
         $lastMonth = Carbon::now()->subDays(30);
-        $allSell=DB::table('physical_store_channel')->where('created_at', '>=', $lastMonth)->get();
+        $soldSell=DB::table('physical_store_channel')->where('created_at', '>=', $lastMonth)
+        ->where('status','sold')->get();
+        $pendingSell=DB::table('physical_store_channel')->where('created_at', '>=', $lastMonth)
+        ->where('status','pending')->get();
 
         return view('Sales.SellLog')
         ->with('title', 'Sell Log')
-        ->with('allSell', $allSell);
+        ->with('soldSell', $soldSell)
+        ->with('pendingSell', $pendingSell);
     }
 
     public function productDetails(Request $request)
