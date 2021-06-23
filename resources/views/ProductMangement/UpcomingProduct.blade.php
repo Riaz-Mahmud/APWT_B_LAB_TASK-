@@ -44,39 +44,44 @@
                         <div class="card col-12 col-sm-12 col-lg-10">
                             <div class="card-header">
                                 <h4 class="card-title">Welcome {{session('fullname')}}</h4>
-                                <h5 class="card-title">Existing Product Details</h5>
+                                <h5 class="card-title">Upcoming Product list</h5>
                             </div>
                             
                             <div class="card-content" >
                                 <div class="card-body">
                                 <div class="table-responsive">
-                                    <b>Product Details</b>
-                                <table border="1">
+                                    <b>Sold Item Log</b>
+                                    <table border="1">
                                     <tr>
-                                        <td> ID </td>
+                                        <td> SL </td>
                                         <td> Name </td>
                                         <td> Price </td>
-                                        <td> Category </td>
-                                        <td> Status </td>
-                                        <td> Vendor Name </td>
-                                        <td> created at </td>
-
+                                        <td> Action </td>
                                     </tr>
+                                    
+                                    @foreach($upcoming as $key=> $product)
                                     <tr>
-                                        <td>{{$pDetails->id}}</td>
-                                        <td>{{$pDetails->product_name}}</td>
-                                        <td>{{$pDetails->price}}</td>
-                                        <td>{{$pDetails->category}}</td>
-                                        <td>{{$pDetails->status}}</td>
-                                        <td>{{$pDetails->vendorName}}</td>
-                                        <td>{{$pDetails->created_at}}</td>
-
+                                        <td>{{++$key}}</td>
+                                        <td>{{$product->product_name}}</td>
+                                        <td>{{$product->price}}</td>
+                                        <td>
+                                            <a href="/system/product_management/product/{{$product->id}}/vendor_details/{{$product->vendorId}}"> Details </a> |
+                                            <a href="/system/product_management/upcoming_products/edit/{{$product->id}}"> Edit </a> |
+                                            <a href="/system/product_management/upcoming_products/delete/{{$product->id}}" onclick="return confirm('Are you sure?')"> Delete </a>
+                                        </td>
                                     </tr>
-                                </table>
-
+                                     @endforeach 
+                                     
+                                    </table>
+                                    <div class="col-md-12 col-12">
+                                        {!! $upcoming->links() !!}
+                                    </div>
+                                    
+                                    </div>
                                 </div>
                             </div>
-                            </div>
+
+                            <a href="/system/product_management">Back</a>
 
                         </div>
                     </div>
