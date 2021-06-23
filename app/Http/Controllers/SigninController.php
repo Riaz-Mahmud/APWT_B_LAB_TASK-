@@ -15,14 +15,17 @@ class SigninController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'full_name' => ['required', 'min:3' ,'max:30'],
-            'user_name' => 'required',
-            'email' => 'required|email|min:10|max:50',
-            'password' => ['required', 
-                            'min:8', 'max:20'],
-            'comfirmPass' => 'required|same:password',
-            'phone' => 'required|min:11|max:15',
-            'user_type' => 'required' 
+            'email' => 'required|email|max:50',
+            'password' => [
+                'required',
+                'string',
+                'min:8', 
+                'max:20',
+                'regex:/[a-z]/',      
+                'regex:/[A-Z]/',      
+                'regex:/[0-9]/',      
+                'regex:/[@$!%*#?&]/', 
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -32,57 +35,37 @@ class SigninController extends Controller
             ]);
         }else{
             $email=$request->input('email');
-            $username=$request->input('user_name');
+            $password=$request->input('password');
 
-            $alreadyExist=DB::table('customers')
-            ->where('user_name',$username)
+            $user=DB::table('customers')
             ->where('email',$email)
+            ->where('status',"active")
             ->first();
             
-            if($alreadyExist){
-                return redirect()->back()->with([
-                    'error' => true,
-                    'message' => 'Username or Email Already register'
-                ]);
+            if($user){
 
-            }else{
-
-                $full_name=$request->input('full_name');
-                $password=$request->input('password');
-                $phone=$request->input('phone');
-                $city=$request->input('city');
-                $country=$request->input('country');
-                $company_name=$request->input('company_name');
-                $user_type=$request->input('user_type');
+                if($user->password == $password){
 
 
-                $data=array();
-                $data['full_name']=$full_name;
-                $data['user_name']=$username;
-                $data['email']=$email;
-                $data['password']=$password;
-                $data['city']=$city;
-                $data['country']=$country;
-                $data['phone']=$phone;
-                $data['company_name']=$company_name;
-                $data['user_type']=$user_type;
-                $data['status']='active';
+                    $request->session()->put('username', $user->user_name);
+                    $request->session()->put('userType', $user->user_type);
 
-                $insert_user = DB::table('customers')->insert($data);
-
-                if($insert_user){
-                    return redirect()->back()->with([
+                    return redirect('/customer/home')->with([
                         'error' => false,
-                        'message' => 'User Create Success Fully'
+                        'message' => 'Login Success'
                     ]);
                 }else{
                     return redirect()->back()->with([
                         'error' => true,
-                        'message' => 'Something going wrong'
+                        'message' => 'user email or password not matched'
                     ]);
                 }
 
-                
+            }else{
+                return redirect()->back()->with([
+                    'error' => true,
+                    'message' => 'user Not found!'
+                ]);
             }
         }
     }

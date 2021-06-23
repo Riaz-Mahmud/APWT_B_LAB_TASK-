@@ -26,3 +26,9 @@ Route::post('/signup','SignupController@signup');
 Route::get('/login', function () {
     return view('LoginSignUp.Login')->with('title', 'Sign In');
 });
+
+Route::post('/login','SigninController@signup');
+
+Route::get('/customer/home', function () {
+    return view('Customer.Home');
+});
