@@ -48,9 +48,16 @@
                             </div>
                             <div class="card-content" >
                                 <div class="card-body">
-                                    @foreach($allSell as $sell)
+                                    <b>Sold Item Log</b>
+                                    @foreach($soldSell as $sell)
                                     <p>Product Name: {{$sell->product_name}} Total Price: {{$sell->total_price}} Customer Name: {{$sell->customer_name}} DateTime: {{$sell->created_at}}</p>
                                     @endforeach 
+
+                                    <br><br>
+                                    <b>Pending Item Log</b>
+                                        @foreach($pendingSell as $psell)
+                                        <p>Product Name: {{$psell->product_name}} Total Price: {{$psell->total_price}} Customer Name: {{$psell->customer_name}} DateTime: {{$psell->created_at}}</p>
+                                        @endforeach 
                                 </div>
                             </div>
 
