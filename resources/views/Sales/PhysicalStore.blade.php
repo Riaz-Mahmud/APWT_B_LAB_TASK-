@@ -41,10 +41,22 @@
                             </div>
                         </div>
                         @endif
-                        <div class="card col-12 col-sm-12 col-lg-8">
+                        <div class="card col-12 col-sm-12 col-lg-10">
+                            <div class="card-header">
+                                <h4 class="card-title">Welcome {{session('fullname')}}</h4>
+                                <h5 class="card-title">Physical Store</h5>
+                            </div>
                             <div class="card-content" >
                                 <div class="card-body">
-                                    <h2>Welcome {{session('fullname')}}</h2>
+                                    <h4>Todays Sale: {{$todayPhysicalSale}}</h4>                            
+                                    <h4>Last 7 Days Sale: {{$thisWeekPhysicalSale}}</h4>
+                                    <h4>Most sold item name:</h4>
+                                    <h4>Average sales amount: {{$avg_sellAmount}}</h4>
+                                    <br>
+                                    <a href="/system/sales/physical_store/sell_product"> <h5>Sell products</h5></a>
+                                    <a href="/system/sales/physical_store/sales_log"> <h5>View Sales Log</h5></a>
+                                    <br>
+                                    <a href="/system/sales">Back</a>
                                     <br>
                                     <a href="/logout"> Logout </a> 
                                 </div>

@@ -35,6 +35,15 @@ Route::group(['middleware'=>['sess']] , function(){
         return view('Customer.Home')->with('title', 'Sign In');
     });
 
+    //Seler Route
+    Route::get('/system/sales','SaleController@index');
+    Route::get('/system/sales/physical_store','SaleController@PhysicalStore');
+    Route::get('/system/sales/physical_store/sell_product','SaleController@SellProduct');
+    Route::post('/system/sales/physical_store/sell_product','SaleController@createSellProduct');
+    Route::get('/system/sales/physical_store/sales_log','SaleController@sellLog');
+
 });
 
 Route::get('/logout','SigninController@logout');
+
+

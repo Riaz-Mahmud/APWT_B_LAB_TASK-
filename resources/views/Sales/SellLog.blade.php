@@ -41,14 +41,21 @@
                             </div>
                         </div>
                         @endif
-                        <div class="card col-12 col-sm-12 col-lg-8">
+                        <div class="card col-12 col-sm-12 col-lg-10">
+                            <div class="card-header">
+                                <h4 class="card-title">Welcome {{session('fullname')}}</h4>
+                                <h5 class="card-title">Physical Store Sell Log</h5>
+                            </div>
                             <div class="card-content" >
                                 <div class="card-body">
-                                    <h2>Welcome {{session('fullname')}}</h2>
-                                    <br>
-                                    <a href="/logout"> Logout </a> 
+                                    @foreach($allSell as $sell)
+                                    <p>Product Name: {{$sell->product_name}} Total Price: {{$sell->total_price}} Customer Name: {{$sell->customer_name}} DateTime: {{$sell->created_at}}</p>
+                                    @endforeach 
                                 </div>
                             </div>
+
+                            <a href="/system/sales/physical_store">Back</a>
+
                         </div>
                     </div>
                 </section>
