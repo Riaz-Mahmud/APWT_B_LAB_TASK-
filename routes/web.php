@@ -43,6 +43,13 @@ Route::group(['middleware'=>['sess']] , function(){
     Route::get('/system/sales/physical_store/sales_log','SaleController@sellLog');
     Route::get('/system/sales/physical_store/checkProductDetails','SaleController@productDetails');
 
+    //product manage
+    Route::get('/system/product_management','ProductController@index');
+    Route::get('/system/product_management/existing_products','ProductController@ExistingProduct');
+    Route::get('system/product_management/product/{product_id}', 'ProductController@ProductDetails');
+    Route::get('/system/product_management/existing_products/delete/{product_id}', 'ProductController@ProductDelete');
+    Route::get('/system/product_management/existing_products/edit/{product_id}', 'ProductController@ProductDetails');
+
 });
 
 Route::get('/logout','SigninController@logout');
