@@ -65,7 +65,7 @@
                                         <td>{{$product->product_name}}</td>
                                         <td>{{$product->price}}</td>
                                         <td>
-                                            <a href="/system/product_management/product/{{$product->id}}"> Details </a> |
+                                            <a href="/system/product_management/product/{{$product->id}}/vendor_details/{{$product->vendorId}}"> Details </a> |
                                             <a href="/system/product_management/existing_products/edit/{{$product->id}}"> Edit </a> |
                                             <a href="/system/product_management/existing_products/delete/{{$product->id}}" onclick="return confirm('Are you sure?')"> Delete </a>
                                         </td>
