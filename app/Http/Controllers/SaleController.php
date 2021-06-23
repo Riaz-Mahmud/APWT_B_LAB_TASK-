@@ -146,7 +146,8 @@ class SaleController extends Controller
 
     public function sellLog(Request $request)
     {
-        $allSell=DB::table('physical_store_channel')->get();
+        $lastMonth = Carbon::now()->subDays(30);
+        $allSell=DB::table('physical_store_channel')->where('created_at', '>=', $lastMonth)->get();
 
         return view('Sales.SellLog')
         ->with('title', 'Sell Log')
