@@ -86,6 +86,7 @@ class SaleController extends Controller
             'address' => ['required', 'min:3' ,'max:50'],
             'phone' => ['required', 'min:11' ,'max:15'],
             'product' => 'required',
+            'unit_price' => 'required',
             'quantity' => 'required',
             'total_price' => 'required',
             'payment_type' => 'required'
@@ -106,6 +107,7 @@ class SaleController extends Controller
             $full_name=$request->input('name');
             $address=$request->input('address');
             $phone=$request->input('phone');
+            $unit_price=$request->input('unit_price');
             $quantity=$request->input('quantity');
             $country=$request->input('country');
             $totalPrice=$request->input('total_price');
@@ -119,7 +121,7 @@ class SaleController extends Controller
             $data['phone']=$phone;
             $data['product_id']=$productId;
             $data['product_name']=$productData->product_name;
-            $data['unit_price']=$productData->id;
+            $data['unit_price']=$unit_price;
             $data['quantity']=$quantity;
             $data['total_price']=$totalPrice;
             $data['date_sold']=$todayDate;
@@ -149,5 +151,24 @@ class SaleController extends Controller
         return view('Sales.SellLog')
         ->with('title', 'Sell Log')
         ->with('allSell', $allSell);
+    }
+
+    public function productDetails(Request $request)
+    {
+        $id = $request->id;
+        $productData=DB::table('products')
+            ->where('id',$id)
+            ->first();
+
+        if($productData){
+            return response()->json([
+                'price' => $productData->price
+            ]);
+        }else{
+            return response()->json([
+                'error' => true,
+                'message' => 'Something went wrong.'
+            ]);
+        }
     }
 }

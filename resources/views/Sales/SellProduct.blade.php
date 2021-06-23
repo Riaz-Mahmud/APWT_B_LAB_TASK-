@@ -62,7 +62,7 @@
 
                                             <div class="col-12 col-sm-12 col-lg-12" style="margin-top:5px;">
                                                 <fieldset class="form-group">
-                                                    <select name="product" class="form-control" id="basicSelect" required>
+                                                    <select id="product" name="product" class="form-control product_list" id="basicSelect" required>
                                                         <option disabled selected>Select Product</option>
                                                         @foreach($productAll as $product)
                                                         <option value="{{$product->id}}">{{$product->product_name}} - {{$product->price}}Tk</option>
@@ -71,10 +71,13 @@
                                                 </fieldset>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-12">
-                                                <input type="number" class="form-control" min=1 max=20 name="quantity" placeholder="Quantity" required>
+                                                <input type="number" class="form-control" min=1 id="unit_price" name="unit_price" placeholder="Unit price" required>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-lg-12 quantity" style="margin-top:5px;">
+                                                <input type="number" class="form-control" min=1 max=20 id="quantity" name="quantity" placeholder="Quantity" required>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-12" style="margin-top:5px;">
-                                                <input type="number" class="form-control" min=1 name="total_price" placeholder="Total Price" required>
+                                                <input type="number" class="form-control" min=1 name="total_price" id="total_price" placeholder="Total Price" required>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-12" style="margin-top:5px;">
                                                 <fieldset class="form-group">
@@ -105,9 +108,49 @@
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
 
+
+    
+
+
     @include('Layout.footer')
 
     @include('Layout.scripts')
+
+    <script>
+        $(document).ready(function(){
+            $(document).on('change','.product_list',function(){
+                var id = $("#product").val();
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ url('/system/sales/physical_store/checkProductDetails') }}",
+                    type: "get",
+                    data: {
+                        id: id
+                    },
+                    success: function(result) {
+                        console.log(result);
+
+                        $('#unit_price').val(result.price);
+                    }
+                });
+            });
+
+            
+
+            $(document).on('change','.quantity',function(){
+                var quantity = $("#quantity").val();
+                var unit_Price = $("#unit_price").val();
+                console.log(quantity);
+                console.log(unit_Price);
+
+                $('#total_price').val(quantity*unit_Price);
+
+            });
+
+        });
+    </script>
 
 </body>
 @endsection

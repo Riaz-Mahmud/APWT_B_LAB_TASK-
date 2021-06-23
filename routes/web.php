@@ -41,6 +41,7 @@ Route::group(['middleware'=>['sess']] , function(){
     Route::get('/system/sales/physical_store/sell_product','SaleController@SellProduct');
     Route::post('/system/sales/physical_store/sell_product','SaleController@createSellProduct');
     Route::get('/system/sales/physical_store/sales_log','SaleController@sellLog');
+    Route::get('/system/sales/physical_store/checkProductDetails','SaleController@productDetails');
 
 });
 
