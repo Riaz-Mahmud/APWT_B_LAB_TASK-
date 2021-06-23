@@ -48,16 +48,18 @@
                             </div>
                             <div class="card-content" >
                                 <div class="card-body">
-                                    <h4>Todays Sale: {{$todayPhysicalSale}}</h4>                            
-                                    <h4>Last 7 Days Sale: {{$thisWeekPhysicalSale}}</h4>
-                                    <h4>Most sold item name:</h4>
-                                    <h4>Average sales amount: {{$avg_sellAmount}}</h4>
+                                    <a href="/system/sales/physical_store/sell_product">Sell products</a> <b>|</b>
+                                    <a href="/system/sales/physical_store/sales_log">View Sales Log</a>
+                                    <br><br>
+                                    <h5>Todays Sale: {{$todayPhysicalSale}}</h5>                            
+                                    <h5>Last 7 Days Sale: {{$thisWeekPhysicalSale}}</h5>
+                                    <h5>Most sold item name:</h5>
+                                    <h5>Average sales amount: {{$avg_sellAmount}}</h5>
                                     <br>
-                                    <a href="/system/sales/physical_store/sell_product"> <h5>Sell products</h5></a>
-                                    <a href="/system/sales/physical_store/sales_log"> <h5>View Sales Log</h5></a>
+                                    
                                     <br>
                                     <a href="/system/sales">Back</a>
-                                    <br>
+                                    <b>|</b>
                                     <a href="/logout"> Logout </a> 
                                 </div>
                             </div>

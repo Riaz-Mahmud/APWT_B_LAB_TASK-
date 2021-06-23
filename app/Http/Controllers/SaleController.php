@@ -72,7 +72,7 @@ class SaleController extends Controller
 
     public function SellProduct(Request $request)
     {
-        $productAll=DB::table('products')->where('type',"physical_store_channe")->get();
+        $productAll=DB::table('products')->get();
 
         return view('Sales.SellProduct')
         ->with('title', 'Sell Product')
