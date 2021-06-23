@@ -29,6 +29,12 @@ Route::get('/login', function () {
 
 Route::post('/login','SigninController@signup');
 
-Route::get('/customer/home', function () {
-    return view('Customer.Home');
+Route::group(['middleware'=>['sess']] , function(){
+
+    Route::get('/customer/home', function () {
+        return view('Customer.Home')->with('title', 'Sign In');
+    });
+
 });
+
+Route::get('/logout','SigninController@logout');

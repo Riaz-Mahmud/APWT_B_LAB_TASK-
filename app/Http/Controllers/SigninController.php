@@ -48,12 +48,10 @@ class SigninController extends Controller
 
 
                     $request->session()->put('username', $user->user_name);
+                    $request->session()->put('fullname', $user->full_name);
                     $request->session()->put('userType', $user->user_type);
 
-                    return redirect('/customer/home')->with([
-                        'error' => false,
-                        'message' => 'Login Success'
-                    ]);
+                    return redirect('/customer/home');
                 }else{
                     return redirect()->back()->with([
                         'error' => true,
@@ -68,5 +66,12 @@ class SigninController extends Controller
                 ]);
             }
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->flush();
+
+        return redirect('/login');
     }
 }
