@@ -47,6 +47,12 @@
                             </div>
                             <div class="card-content" >
                                 <div class="card-body">
+                                    <a href="/system/sales/physical_store">Physical Store</a> 
+                                    <b>|</b> 
+                                    <a href="/system/sales/social_media">Social Media </a> 
+                                    <b>|</b>
+                                    <a href="/system/sales/ecommerce">Ecommerce Web App </a>
+                                    <br><br>
                                     <h4>Todays Sale:</h4>
                                     <h6>Physical Store: {{$todayPhysicalSale}}</h6>
                                     <h6>Social Media: {{$todaySocialSale}}</h6>
@@ -57,10 +63,8 @@
                                     <h6>Social Media: {{$thisWeekSocialSale}}</h6>
                                     <h6>Ecommerce Web App: {{$thisWeekEcomSale}}</h6>
                                     <br>
-                                    <a href="/system/sales/physical_store"> <h5>Physical Store</h5>  </a>
-                                    <a href="/system/sales/social_media"> <h5>Social Media</h5> </a>
-                                    <a href="/system/sales/ecommerce"> <h5>Ecommerce Web App</h5> </a>
-                                    <br>
+                                    
+                                    <br><br>
                                     <a href="/logout"> Logout </a> 
                                 </div>
                             </div>
