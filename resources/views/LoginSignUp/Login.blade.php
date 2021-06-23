@@ -51,7 +51,7 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-12 col-sm-12 col-lg-12" style="margin-top:5px;">
-                                                <input type="text" class="form-control" name="user_name" placeholder="User name" required>
+                                                <input type="text" class="form-control" name="email" placeholder="Email" required>
                                             </div>
                                             <div class="col-12 col-sm-12 col-lg-12" style="margin-top:5px;">
                                                 <input type="password" class="form-control" name="password" placeholder="Password" required>
